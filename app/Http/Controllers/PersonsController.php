@@ -7,7 +7,8 @@ use montserrat\Http\Requests;
 use montserrat\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 use Input;
-
+use Illuminate\Support\Facades\Storage;
+use Intervention;
 
 
 
@@ -88,7 +89,7 @@ class PersonsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request);//
         $this->validate($request, [
             'first_name' => 'required',
             'last_name' => 'required',
@@ -110,10 +111,10 @@ class PersonsController extends Controller
             'religion_id' => 'integer|min:0',
             'contact_type' => 'integer|min:0',
             'subcontact_type' => 'integer|min:0',
-            'occupation_id' => 'integer|min:0'
+            'occupation_id' => 'integer|min:0',
+            'avatar' => 'image',
         
         ]);
-               
         $person = new \montserrat\Contact;
         // name info
         $person->prefix_id = $request->input('prefix_id');
