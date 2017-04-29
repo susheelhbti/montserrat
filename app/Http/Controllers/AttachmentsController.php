@@ -190,7 +190,7 @@ class AttachmentsController extends Controller
             case 'contract':
                 $this->authorize('create-event-contract');
                 $path = $entity.'/'.$entity_id.'/';
-                $file_type_id = FILE_TYPE_EVENT_SCHEDULE;
+                $file_type_id = FILE_TYPE_EVENT_CONTRACT;
                 $file_name = 'contract.pdf';
                 $updated_file_name= 'contract-updated-'.time().'.pdf';
 
