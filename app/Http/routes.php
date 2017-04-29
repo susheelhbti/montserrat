@@ -1,7 +1,7 @@
 <?php
 // use Sentry;
-use Illuminate\Contracts\Auth\Guard;
-use Illuminate\Support\Str;
+// use Illuminate\Contracts\Auth\Guard;
+// use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +33,7 @@ Route::get('avatar/{user_id}/delete', ['as' => 'delete_avatar','uses' => 'Attach
 
 Route::get('contact/{user_id}/attachment/{file_name}', ['as' => 'show_contact_attachment','uses' => 'AttachmentsController@show_contact_attachment']);
 Route::get('contact/{user_id}/attachment/{file_name}/delete', ['as' => 'delete_contact_attachment','uses' => 'AttachmentsController@delete_contact_attachment']);
+Route::get('retreat/id/{id_number}', ['as' => 'get_event_by_id_number','uses' => 'RetreatsController@get_event_by_id_number']);
 
 Route::get('retreat/{event_id}/contract', ['as' => 'get_event_contract','uses' => 'AttachmentsController@get_event_contract']);
 Route::get('retreat/{event_id}/contract/delete', ['as' => 'delete_event_contract','uses' => 'AttachmentsController@delete_event_contract']);
