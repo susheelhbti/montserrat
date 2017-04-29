@@ -256,13 +256,13 @@ class AttachmentsController extends Controller
                 break;
             case 'contract':
                 $file_name='contract.pdf';
-                $attachment = \montserrat\Attachment::whereEntity($entity)->whereEntityId($entity_id)->whereUri($file_name)->whereFileTypeId(FILE_TYPE_EVENT_CONTRACT_PHOTO)->firstOrFail();
+                $attachment = \montserrat\Attachment::whereEntity($entity)->whereEntityId($entity_id)->whereUri($file_name)->whereFileTypeId(FILE_TYPE_EVENT_CONTRACT)->firstOrFail();
                 $path = $entity.'/'.$entity_id.'/';
                 $updated_file_name = 'contract-deleted-'.time().'.pdf';
                 break;
             case 'schedule':
                 $file_name='schedule.pdf';
-                $attachment = \montserrat\Attachment::whereEntity($entity)->whereEntityId($entity_id)->whereUri($file_name)->whereFileTypeId(FILE_TYPE_EVENT_CONTRACT)->firstOrFail();
+                $attachment = \montserrat\Attachment::whereEntity($entity)->whereEntityId($entity_id)->whereUri($file_name)->whereFileTypeId(FILE_TYPE_EVENT_SCHEDULE)->firstOrFail();
                 $path = $entity.'/'.$entity_id.'/';
                 $updated_file_name = 'schedule-deleted-'.time().'.pdf';
                 break;
