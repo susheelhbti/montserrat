@@ -11,12 +11,20 @@ use Illuminate\Support\Facades\File;
 use Response;
 use Image;
 use App\Http\Controllers\AttachmentController;
+use Carbon\Carbon;
+use App\Retreat;
+use Illuminate\Mail\Mailer;
+use App\Mail\RetreatConfirmation;
 
 class RetreatController extends Controller
 {
-    public function __construct()
+    protected $retreat;
+    protected $mailer;
+    public function __construct(Retreat $retreat, Mailer $mailer)
     {
         $this->middleware('auth');
+        $this->retreat = $retreat;
+        $this->mailer = $mailer;
     }
 
     /**
@@ -502,5 +510,44 @@ class RetreatController extends Controller
     {
         $calendar_events = \Spatie\GoogleCalendar\Event::get();
         return view('calendar.index', compact('calendar_events'));
+    }
+
+    public function confirmationEmails(Request $request, $event_id) 
+    {
+        $automaticSuccessMessage = "Automatic confirmation email has been sent for retreat #".$event_id.".";
+        $automaticErrorMessage = "Automatic confirmation email failed to send for retreat #".$event_id.".";
+        $retreat = $this->retreat->find($event_id);
+        $registrations = $retreat->registrations()->missingSystemTouchpoint($automaticSuccessMessage)->get();
+
+        foreach ($registrations as $registration) {
+            $primaryEmail = $registration->contact->email_primary_text;
+
+            if ($primaryEmail) {
+                  // For automatic emails, remember_token must be set for all participants in retreat. 
+                if (!$registration->remember_token) {
+                    $registration->remember_token = str_random(60);
+                    $registration->save();
+                }
+
+                $touchpoint = new \App\Touchpoint;
+                $system = $touchpoint->system();
+
+                if (!is_null($system)) {
+                    $system->person_id = $registration->contact->id;
+                    $system->type = 'Email';
+                
+                    try {
+                        $this->mailer->to($primaryEmail)->queue(new RetreatConfirmation($registration));
+                        $system->notes = $automaticSuccessMessage;
+                        $system->save();
+                    } catch ( \Exception $e ) {
+                        $$system->notes = $automaticErrorMessage;
+                        $system->save();
+                    }
+                }
+            }
+        }
+
+        return redirect()->action('RetreatController@show', ['id' => $event_id]);
     }
 }

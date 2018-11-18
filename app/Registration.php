@@ -300,7 +300,8 @@ class Registration extends Model
             return 0;
         }
     }
-    public function getPaymentPaidAttribute() {
+    public function getPaymentPaidAttribute() 
+    {
         
         if ((!is_null($this->donation) && (!is_null($this->donation->retreat_offering)))) {
             return $this->donation->retreat_offering->payment_amount; 
@@ -309,4 +310,18 @@ class Registration extends Model
             return 0;
         }
     }
+    public function scopeMissingSystemTouchpoint($query, $notes)
+    {
+        return $query->where('canceled_at', null)
+            ->where('status_id', 1)
+            ->with('contact')
+            ->whereHas('contact', function($query) {
+                $query->where('do_not_email', 0);
+            })
+            ->with('contact.touchpoints')
+            ->whereDoesntHave('contact.touchpoints', function($query) use ($notes){
+                $query->where('notes', 'like', $notes);
+            });
+    }
+
 }

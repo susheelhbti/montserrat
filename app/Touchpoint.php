@@ -42,4 +42,16 @@ class Touchpoint extends Model
     {
         return !$this->where('person_id', $contact)->where('notes', 'like', $retreat.' registration email sent.')->first();
     }
+
+    public static function system() 
+    {
+        $alfonso = \App\Contact::where('display_name', 'Juan Alfonso de Polanco')->first();
+        if (is_null($alfonso)) {
+            return null;
+        }
+        $touchpoint = new \App\Touchpoint();
+        $touchpoint->staff_id = $alfonso->id;
+        $touchpoint->touched_at = Carbon::now();
+        return $touchpoint;
+    }
 }

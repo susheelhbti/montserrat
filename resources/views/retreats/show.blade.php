@@ -15,6 +15,7 @@
                 {!! Html::link('#registrations','Registrations',array('class' => 'btn btn-default')) !!}
                 @can('create-touchpoint')
                     {!! Html::link(action('TouchpointController@add_retreat',$retreat->id),'Retreat touchpoint',array('class' => 'btn btn-default'))!!}
+                    {!! Html::link(action('RetreatController@confirmationEmails', $retreat->id),'Confirmation Emails',array('class' => 'btn btn-default'))!!}
                 @endCan    
                 @can('show-contact')
                     {!! Html::link(action('PageController@retreatantinforeport',$retreat->idnumber),'Retreatant information',array('class' => 'btn btn-default'))!!}
