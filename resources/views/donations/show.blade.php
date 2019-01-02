@@ -47,7 +47,7 @@
                             <th>Date</th>
                             <th>Amount</th>
                             <th>Description</th>
-                            <th>Check or CC#</th>
+                            <th>Check ?? CC#</th>
                             <th>Note</th>
                         </tr>
                     </thead>
@@ -59,7 +59,7 @@
                             <td><a href="../payment/{{ $payment->payment_id}}">{{$payment->payment_date_formatted}}</a></td>
                             <td>${{ $payment->payment_amount }} </td>
                             <td>{{ $payment->payment_description }}</td>
-                            <td>{{ $payment->cknumber or $payment->ccnumber }}</td>
+                            <td>{{ $payment->cknumber ?? $payment->ccnumber }}</td>
                             <td>{{ $payment->note }}
                         </tr>
                         @endforeach

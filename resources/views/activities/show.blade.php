@@ -22,16 +22,16 @@
                         <br /><strong>Type: </strong>{{$activity->activity_type_label}}     
                         <br /><strong>Assignee(s): </strong>{!! $activity->assignees_full_name_link !!}  
                         <br /><strong>Person(s) Contacted: </strong>{!! $activity->targets_full_name_link !!}  
-                        <br /><strong>Subject: </strong>{{$activity->subject or 'N/A'}}
-                        <br /><strong>Notes: </strong>{{$activity->details or 'N/A'}}
+                        <br /><strong>Subject: </strong>{{$activity->subject ?? 'N/A'}}
+                        <br /><strong>Notes: </strong>{{$activity->details ?? 'N/A'}}
                         <br /><strong>Medium: </strong>{{$activity->medium_label}}
                         <br /><strong>Status: </strong>{{$activity->status_label}}
                         <br /><strong>Duration: </strong>{{$activity->duration}}
                         <br /><strong>Priority: </strong>{{$activity->priority_label}}
-                        <br /><strong>Location: </strong>{{$activity->location or 'N/A'}}
+                        <br /><strong>Location: </strong>{{$activity->location ?? 'N/A'}}
                         <br /><strong>Created by: </strong>{!! $activity->sources_full_name_link !!}  
-                        <br /><strong>Parent: </strong>{{$activity->parent_id or 'N/A'}}
-                        <br /><strong>Original: </strong>{{$activity->original_id or 'N/A'}}
+                        <br /><strong>Parent: </strong>{{$activity->parent_id ?? 'N/A'}}
+                        <br /><strong>Original: </strong>{{$activity->original_id ?? 'N/A'}}
                 </div>
             </div></div>
             <div class='row'>

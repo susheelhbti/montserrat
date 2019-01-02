@@ -36,12 +36,12 @@
                         <tr>
 
                             <td><a href="payment/{{ $payment->payment_id}}">{{ date('M d, Y g:i A', strtotime($payment->payment_date)) }}</a></td>
-                            <td>{{ $payment->donation->donation_description or 'Unspecified' }} </td>
+                            <td>{{ $payment->donation->donation_description ?? 'Unspecified' }} </td>
                             <td>${{ number_format($payment->donation->donation_amount,2) }} / ${{ number_format($payment->payment_amount,2) }} ({{number_format($payment->donation->percent_paid,0)}}%)</td>
                             <td></td>
                             <td>{{ $payment->payment_description }}</td>
-                            <td>{{ $payment->ccnumber or $payment->cknumber}}</td>
-                            <td>{{ $payment->donation->retreat->title or 'N/A'}}</td>
+                            <td>{{ $payment->ccnumber ?? $payment->cknumber}}</td>
+                            <td>{{ $payment->donation->retreat->title ?? 'N/A'}}</td>
                         </tr>
                         @endforeach
                         

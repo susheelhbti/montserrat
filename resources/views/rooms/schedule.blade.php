@@ -44,7 +44,7 @@
                                  @foreach($dts as $dt)
                                  @if ($dt->day == 21) 
                                     <td class="warning">R</td>
-                                 @elseif ($dt->day == 22 or $room->name == "104") 
+                                 @elseif ($dt->day == 22 ?? $room->name == "104") 
                                     <td class="danger">M</td>
                                  @elseif ($dt->day == 23) 
                                     <td class="warning">O</td>
