@@ -35,7 +35,8 @@
                 <tbody>
                     @foreach($relationships as $relationship)
                     <tr>
-                        <td><a href="relationship/{{ $relationship->id}}">{{ $relationship->id }}</a></td>
+                        {{-- remove right align as part of wip-227 --}}
+                        <td align="right"><a href="relationship/{{ $relationship->id}}">{{ $relationship->id }}</a></td>
                         <td>{{ $relationship->relationship_type->name_a_b }}</td>
                         <td>{!! $relationship->contact_a->contact_link !!}</td>
                         <td>{!! $relationship->contact_b->contact_link !!}</td>
@@ -50,4 +51,5 @@
         {!! $relationships->render() !!}
     </div>
 </div>
+
 @stop
