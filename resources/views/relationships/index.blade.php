@@ -1,7 +1,8 @@
 @extends('template')
 @section('content')
 
-<div class="row bg-cover">
+{{-- remove stlye setting margin to 0 after merging wip-227 --}}
+<div class="row bg-cover" style='margin:0;'>
     <div class="col-12">
         <h2>
             Relationship Index
@@ -35,8 +36,7 @@
                 <tbody>
                     @foreach($relationships as $relationship)
                     <tr>
-                        {{-- remove right align as part of wip-227 --}}
-                        <td align="right"><a href="relationship/{{ $relationship->id}}">{{ $relationship->id }}</a></td>
+                        <td><a href="relationship/{{ $relationship->id}}">{{ $relationship->id }}</a></td>
                         <td>{{ $relationship->relationship_type->name_a_b }}</td>
                         <td>{!! $relationship->contact_a->contact_link !!}</td>
                         <td>{!! $relationship->contact_b->contact_link !!}</td>

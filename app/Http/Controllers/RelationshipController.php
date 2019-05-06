@@ -54,6 +54,9 @@ class RelationshipController extends Controller
     public function show($id)
     {
         $this->authorize('show-relationship');
+        $relationship = \App\Relationship::findOrFail($id);
+        return view('relationships.show', compact('relationship'));   //
+
     }
 
     /**
