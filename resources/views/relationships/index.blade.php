@@ -37,8 +37,8 @@
                     <tr>
                         <td><a href="relationship/{{ $relationship->id}}">{{ $relationship->id }}</a></td>
                         <td>{{ $relationship->relationship_type->name_a_b }}</td>
-                        <td>{{ $relationship->contact_a->display_name }}</td>
-                        <td>{{ $relationship->contact_b->display_name }}</td>
+                        <td>{!! $relationship->contact_a->contact_link !!}</td>
+                        <td>{!! $relationship->contact_b->contact_link !!}</td>
                         <td>{{ $relationship->start_date }}</td>
                         <td>{{ $relationship->end_date }}</td>
                         <td>{{ $relationship->is_active }}</td>
